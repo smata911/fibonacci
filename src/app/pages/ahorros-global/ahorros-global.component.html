@@ -1,0 +1,161 @@
+
+<body>
+    <!-- <div class="image" style="height: 500vh;width:100vw;" [ngStyle]="{'background': 'url(https://image.freepik.com/foto-gratis/fondo-moderno-lineas_1361-3533.jpg) no-repeat 0 0'}"> -->
+
+<p>SELECCIONA EL TIEMPO DE AHORRO: </p>
+<div class="container">
+
+    
+    <form class="form item"  #checkoutForm="ngForm">
+
+
+        <mat-form-field class="form__element" appearance="fill">
+            
+            <select 
+            matInput
+           
+            name="tiempo"
+            [(ngModel)]="model.tiempo"
+            (change)="onChange('value')"
+            #name="ngModel"
+            matNativeControl required>
+            <option disabled selected>Selecciona una opción</option>
+              <option value="DIA">DIA</option>
+              <option value="SEMANA">SEMANA</option>
+              <option value="MES">MES</option>
+              <option value="AÑO">AÑO</option>
+            </select>
+          </mat-form-field>
+
+
+
+        <mat-form-field  class="form__element" color="primary">  
+            <input class="placeholder"
+            
+            type="number"
+            matInput
+            placeholder={{etiqueta}}
+        
+            required
+            [(ngModel)]="model.totalAhorro"
+            name="totalAhorro"
+            #name="ngModel"
+          
+            />
+            <mat-error *ngIf="!name.valid || name.pristine">
+                llenar este campo
+            </mat-error>
+
+        </mat-form-field>
+
+
+
+
+
+
+
+        <mat-form-field class="form__element" appearance="fill">
+            
+            <select 
+            matInput
+           
+            name="moneda"
+            [(ngModel)]="model.moneda"
+            
+            #name="ngModel"
+            matNativeControl required>
+            <option disabled selected>Selecciona una moneda</option>
+              <option value="L.">LEMPIRAS</option>
+              <option value="MX.">PESOS MX</option>
+              <option value="COP.">PESOS COLOMBIANOS</option>
+              <option value="$">DOLARES</option>
+              
+            </select>
+          </mat-form-field>
+          
+
+
+        <mat-form-field  class="form__element">  
+            <input class="placeholder"
+            type="number"
+            matInput
+            placeholder="CANTIDAD DE DINERO A INICIAR: "
+        
+            required
+            [(ngModel)]="model.cantidadInicio"
+            name="cantidadInicio"
+            #name="ngModel"
+          
+            />
+
+        </mat-form-field>
+
+
+
+
+
+
+
+    
+
+    </form>
+</div>
+
+
+
+<div class="container__table">
+    <table class="table">
+
+        <thead>
+
+            <tr>
+                <th>DEBES AHORRAR:</th>
+                
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let fibo of fibo">
+                <td>{{fibo}}</td>
+               
+            </tr>
+        </tbody>
+    </table>
+
+   
+
+</div>
+
+
+
+
+
+
+
+<div class="container__button">
+    <button
+    mat-raised-button
+    color=primary
+    [disabled]="(model.tiempo.length === 0 || model.totalAhorro.length === 0 || model.cantidadInicio===0 || model.moneda.length===0 || fibo.length!=0) "
+    (click)="onSubmit(checkoutForm)"
+    >
+        ANALIZAR
+    </button>
+
+
+    <button 
+    mat-raised-button
+    color=primary
+   
+    (click)="onLimpiar(checkoutForm)"
+    >
+        LIMPIAR
+    </button>
+</div>
+<!-- </div> -->
+
+</body>
+
+
+
+
